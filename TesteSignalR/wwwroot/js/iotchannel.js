@@ -32,14 +32,13 @@ connection.start().then(function () {
 
 document.getElementById("sendButton").addEventListener("click", function (event) {
     var sender = Number(document.getElementById("senderInput").value);
-    var receiver = document.getElementById("receiverInput").value;
 
     if (!Number.isInteger(sender)) {
         console.error("Sender must be a whole number.");
         return;
     }
 
-    connection.invoke("SendSignal", sender, receiver).catch(function (err) {
+    connection.invoke("SendSignal", sender).catch(function (err) {
         return console.error(err.toString());
     });
     event.preventDefault();

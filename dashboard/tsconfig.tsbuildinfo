@@ -1,0 +1,1 @@
+{"root":["./src/app.tsx","./src/main.tsx","./src/types.ts","./src/usehub.ts","./src/vite-env.d.ts","./src/components/devicecard.tsx","./src/components/eventlog.tsx","./src/components/wavemark.tsx"],"version":"5.9.3"}
