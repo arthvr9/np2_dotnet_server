@@ -12,9 +12,6 @@ builder.Services.AddRazorPages();
 builder.Services.AddSignalR();
 builder.Services.AddSingleton<DeviceRegistry>();
 
-// O dashboard roda em outra origem (Vite). SignalR exige AllowCredentials, que e
-// incompativel com AllowAnyOrigin, entao cada origem precisa ser aprovada uma a uma.
-// Aceita qualquer porta local para nao quebrar quando o Vite cai na 5174.
 builder.Services.AddCors(o => o.AddPolicy("dashboard", p => p
     .SetIsOriginAllowed(origem =>
         Uri.TryCreate(origem, UriKind.Absolute, out var uri) &&
@@ -50,15 +47,11 @@ builder.Services.AddAuthorization();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
-
-// app.UseHttpsRedirection();
 
 app.UseRouting();
 

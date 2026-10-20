@@ -20,7 +20,6 @@ namespace TesteSignalR.Hubs
         {
             var state = _registry.SetPressed(Id, pressed);
 
-            // Dispositivos acionam o buzzer; monitores so acompanham.
             await Clients.OthersInGroup(GrupoDispositivos).SendAsync("ReceiveSignal", Id, pressed);
             await Clients.Group(GrupoMonitores).SendAsync("DeviceChanged", state);
         }
@@ -52,9 +51,7 @@ namespace TesteSignalR.Hubs
             if (!EhMonitor)
             {
                 var state = _registry.Disconnect(Id);
-
-                // Trava de seguranca: se o dispositivo caiu com o botao pressionado,
-                // ninguem mais vai mandar o "soltou".
+                
                 await Clients.OthersInGroup(GrupoDispositivos).SendAsync("ReceiveSignal", Id, false);
                 await Clients.Group(GrupoMonitores).SendAsync("DeviceChanged", state);
             }

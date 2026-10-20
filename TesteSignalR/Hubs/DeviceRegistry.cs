@@ -3,10 +3,7 @@ using System.Collections.Concurrent;
 namespace TesteSignalR.Hubs
 {
     public record DeviceState(string Id, bool Online, bool Pressed, DateTimeOffset LastSeen);
-
-    /// <summary>
-    /// Estado dos dispositivos conectados. Singleton: vive enquanto o processo viver.
-    /// </summary>
+    
     public class DeviceRegistry
     {
         private readonly ConcurrentDictionary<string, DeviceState> _devices = new();
